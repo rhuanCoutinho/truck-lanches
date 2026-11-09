@@ -1,8 +1,8 @@
 # Cardápio digital — Truck Lanches
 
-Site estático feito com HTML, CSS e JavaScript puro. Não precisa de servidor, banco de dados, mensalidade ou dependências. O pedido é montado no navegador e enviado pelo cliente ao WhatsApp da lanchonete.
+Site estático feito com HTML, CSS e JavaScript puro. Não precisa de servidor, banco de dados, mensalidade ou dependências. O pedido é montado no navegador e enviado pelo cliente ao WhatsApp da lanchonete. ***Site em Desenvolvimento, está é apenas a primeira versão, falta adicionar os lanches reais e terminar as configurações necessárias.***
 
-deploy: trucklanches.netlify.app
+[trucklanches.netlify.app](https://trucklanches.netlify.app/)
 
 ## Arquivos
 
