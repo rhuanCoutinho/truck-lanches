@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Confira o cardápio, monte seu pedido e envie direto pelo WhatsApp."
+    />
+    <meta name="theme-color" content="#181818" />
+    <title>Cardápio | Truck Lanches</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="cardapio.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topo">
+      <div class="topo-conteudo">
+        <a class="marca" href="#inicio" aria-label="Voltar ao início">
+          <span class="marca-icone" aria-hidden="true">🍔</span>
+          <span id="nome-loja">Truck Lanches</span>
+        </a>
+        <a class="atalho-carrinho" href="#carrinho">
+          Meu pedido <span id="contador-carrinho" class="contador">0</span>
+        </a>
+      </div>
+    </header>
+
+    <main id="inicio" class="pagina">
+      <section class="boas-vindas" aria-labelledby="titulo-pagina">
+        <div>
+          <p class="sobretitulo">Feito na hora, do nosso jeito</p>
+          <h1 id="titulo-pagina">Bateu a fome?</h1>
+          <p class="texto-boas-vindas">
+            Escolha seus favoritos e mande o pedido direto para a gente pelo WhatsApp.
+          </p>
+        </div>
+        <span class="ilustracao-lanche" aria-hidden="true">🍟</span>
+      </section>
+
+      <div class="layout">
+        <section class="catalogo" aria-labelledby="titulo-cardapio">
+          <div class="titulo-secao">
+            <div>
+              <p class="sobretitulo">Escolha com carinho</p>
+              <h2 id="titulo-cardapio">Nosso cardápio</h2>
+            </div>
+          </div>
+
+          <nav id="categorias" class="categorias" aria-label="Categorias do cardápio"></nav>
+          <nav
+            id="subcategorias"
+            class="subcategorias"
+            aria-label="Tipos de lanches"
+            hidden
+          ></nav>
+          <div id="produtos" class="grade-produtos" aria-live="polite"></div>
+        </section>
+
+        <aside id="carrinho" class="painel-carrinho" aria-labelledby="titulo-carrinho">
+          <div class="titulo-carrinho">
+            <div>
+              <h2 id="titulo-carrinho">Seu pedido</h2>
+            </div>
+            <span class="sacola-icone" aria-hidden="true">🛍️</span>
+          </div>
+
+          <div id="itens-carrinho" class="itens-carrinho"></div>
+
+          <div class="resumo-pedido">
+            <span>Subtotal</span>
+            <strong id="subtotal">R$ 0,00</strong>
+          </div>
+          <p class="aviso-total">Entrega e pagamento são combinados pelo WhatsApp.</p>
+
+          <form id="formulario-pedido" class="formulario-pedido">
+            <h3>Para onde vai o pedido?</h3>
+
+            <label for="nome-cliente">Seu nome</label>
+            <input
+              id="nome-cliente"
+              name="nome"
+              type="text"
+              autocomplete="name"
+              placeholder="Como podemos te chamar?"
+              maxlength="80"
+              required
+            />
+
+            <fieldset class="recebimento">
+              <legend>Como deseja receber?</legend>
+              <div class="opcoes-entrega">
+                <label class="opcao-entrega">
+                  <input type="radio" name="recebimento" value="Retirada" required />
+                  <span>Retirada no local</span>
+                </label>
+                <label class="opcao-entrega">
+                  <input type="radio" name="recebimento" value="Entrega" required />
+                  <span>Entrega</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div id="campos-entrega" class="campos-entrega" hidden>
+              <label for="cep-cliente">CEP</label>
+              <input
+                id="cep-cliente"
+                name="cep"
+                type="text"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                placeholder="00000-000"
+                maxlength="9"
+                pattern="[0-9]{5}-?[0-9]{3}"
+                aria-describedby="status-cep"
+              />
+              <p id="status-cep" class="status-cep" role="status" aria-live="polite">
+                Digite o CEP para buscar o endereço automaticamente.
+              </p>
+
+              <div class="grade-endereco">
+                <div class="campo-endereco campo-endereco-largo">
+                  <label for="rua-cliente">Rua</label>
+                  <input
+                    id="rua-cliente"
+                    name="rua"
+                    type="text"
+                    autocomplete="address-line1"
+                    placeholder="Preenchida pelo CEP"
+                    maxlength="120"
+                  />
+                </div>
+                <div class="campo-endereco">
+                  <label for="numero-cliente">Número</label>
+                  <input
+                    id="numero-cliente"
+                    name="numero"
+                    type="text"
+                    inputmode="text"
+                    placeholder="Nº ou s/n"
+                    maxlength="20"
+                  />
+                </div>
+                <div class="campo-endereco">
+                  <label for="bairro-cliente">Bairro</label>
+                  <input
+                    id="bairro-cliente"
+                    name="bairro"
+                    type="text"
+                    autocomplete="address-level3"
+                    placeholder="Preenchido pelo CEP"
+                    maxlength="100"
+                  />
+                </div>
+                <div class="campo-endereco campo-endereco-largo">
+                  <label for="cidade-cliente">Cidade</label>
+                  <input
+                    id="cidade-cliente"
+                    name="cidade"
+                    type="text"
+                    autocomplete="address-level2"
+                    placeholder="Preenchida pelo CEP"
+                    maxlength="100"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <fieldset class="pagamento">
+              <legend>Forma de pagamento</legend>
+              <div class="opcoes-pagamento">
+                <label class="opcao-pagamento">
+                  <input type="radio" name="pagamento" value="Dinheiro" required />
+                  <span>Dinheiro</span>
+                </label>
+                <label class="opcao-pagamento">
+                  <input type="radio" name="pagamento" value="Pix" required />
+                  <span>Pix</span>
+                </label>
+                <label class="opcao-pagamento">
+                  <input type="radio" name="pagamento" value="Cartão" required />
+                  <span>Cartão</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <p id="mensagem-configuracao" class="mensagem-configuracao" role="status" hidden></p>
+            <button id="finalizar-pedido" class="botao-finalizar" type="submit" disabled>
+              Pedir pelo WhatsApp <span aria-hidden="true">→</span>
+            </button>
+            <p class="nota-whatsapp">Você poderá revisar e enviar a mensagem no WhatsApp.</p>
+          </form>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <p>Desenvolvido por Couto.Dev © 2026</p>
+    </footer>
+
+    <div id="anuncio" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+  </body>
+</html>
