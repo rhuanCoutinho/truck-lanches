@@ -2,6 +2,8 @@
 
 Site estático feito com HTML, CSS e JavaScript puro. Não precisa de servidor, banco de dados, mensalidade ou dependências. O pedido é montado no navegador e enviado pelo cliente ao WhatsApp da lanchonete.
 
+deploy: trucklanches.netlify.app
+
 ## Arquivos
 
 - `index.html`: estrutura da página e formulário do pedido.
