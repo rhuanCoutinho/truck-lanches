@@ -16,6 +16,9 @@
     produtos: document.querySelector("#produtos"),
     itensCarrinho: document.querySelector("#itens-carrinho"),
     contadorCarrinho: document.querySelector("#contador-carrinho"),
+    sacolaFlutuante: document.querySelector("#sacola-flutuante"),
+    sacolaFlutuanteContagem: document.querySelector("#sacola-flutuante-contagem"),
+    sacolaFlutuanteSubtotal: document.querySelector("#sacola-flutuante-subtotal"),
     subtotal: document.querySelector("#subtotal"),
     formulario: document.querySelector("#formulario-pedido"),
     camposEntrega: document.querySelector("#campos-entrega"),
@@ -267,10 +270,16 @@
     const itens = obterProdutosNoCarrinho();
     const quantidadeTotal = itens.reduce((total, item) => total + item.quantidade, 0);
     const temEsgotado = itens.some((item) => item.produto.esgotado);
+    const subtotalAtual = moeda.format(obterSubtotal());
 
     elementos.contadorCarrinho.textContent = quantidadeTotal;
     elementos.contadorCarrinho.setAttribute("aria-label", `${quantidadeTotal} itens no pedido`);
-    elementos.subtotal.textContent = moeda.format(obterSubtotal());
+    elementos.subtotal.textContent = subtotalAtual;
+    elementos.sacolaFlutuante.hidden = itens.length === 0;
+    elementos.sacolaFlutuanteContagem.textContent = `${quantidadeTotal} ${quantidadeTotal === 1 ? "item" : "itens"} na sacola`;
+    elementos.sacolaFlutuanteSubtotal.textContent = subtotalAtual;
+    elementos.sacolaFlutuante.setAttribute("aria-label", `Ver sacola com ${quantidadeTotal} ${quantidadeTotal === 1 ? "item" : "itens"}; subtotal ${subtotalAtual}`);
+    document.body.classList.toggle("com-sacola-flutuante", itens.length > 0);
     elementos.finalizar.disabled = itens.length === 0 || temEsgotado;
 
     if (itens.length === 0) {
@@ -411,6 +420,8 @@
       `• ${quantidade}x ${produto.nome} — ${moeda.format(produto.preco * quantidade)}`
     );
     const mensagem = [
+     `*Nome:* ${nome}`,
+      "",
       `*PEDIDO — ${dados.loja.nome}*`,
       "",
       "*Itens do pedido:*",
@@ -426,8 +437,7 @@
         `*Cidade:* ${cidade}`
       ] : []),
       `*Forma de pagamento:* ${pagamento}`,
-      "",
-      `*Nome:* ${nome}`
+      
     ].join("\n");
 
     const url = `https://wa.me/${19994268308}?text=${encodeURIComponent(`finalize seu pedido aqui: ${mensagem}`)}`;
