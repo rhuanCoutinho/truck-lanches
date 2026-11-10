@@ -440,7 +440,7 @@
       
     ].join("\n");
 
-    const url = `https://wa.me/${19994268308}?text=${encodeURIComponent(`finalize seu pedido aqui: ${mensagem}`)}`;
+    const url = `https://wa.me/${19994268308}?text=${encodeURIComponent(`${mensagem}`)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   });
 
